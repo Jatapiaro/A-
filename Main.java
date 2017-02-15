@@ -1,4 +1,9 @@
 import java.util.HashMap;
+import javax.swing.JOptionPane;
+import javax.swing.JComponent;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import java.awt.Dimension;
 
 public class Main{
 	public static void main(String[] args) {
@@ -50,10 +55,46 @@ public class Main{
 		gf.addAdyacenteBi('F','I',7);
 		gf.addAdyacenteBi('F','H',18);
 
-		gf.addAdyacenteBi('H','1',15);
+		gf.addAdyacenteBi('H','I',15);
 
+		int option = -1;
 
-		System.out.println(gf.aStar('A','H',heuristic));
+		while(option!=2){
+			option = Integer.parseInt(
+				JOptionPane.showInputDialog("1.Encuentra una ruta\n2.Salir"));
+			if(option == 1){
+				String[] data = JOptionPane.showInputDialog(
+					"Ingresa los ID's de los nodos separados por una coma. \n\tEjemplo: A,H").split(",");
+
+				if(data.length>2){
+					JOptionPane.showMessageDialog(null,"Ingreso incorrecto de datos");
+				}else{
+					if(data[0].length() == 1 && data[1].length()==1){
+						char inicio = data[0].charAt(0);
+						char fin = data[1].charAt(0);
+
+						String rs = gf.aStar(inicio,fin,heuristic);
+
+						JTextArea textArea = new JTextArea(rs);
+						JScrollPane scrollPane=new JScrollPane(textArea);
+						textArea.setLineWrap(true);
+						scrollPane.setPreferredSize(new Dimension(400,200));
+						JOptionPane.showMessageDialog(null, 
+							scrollPane,
+							"Ruta de "+data[0]+" a "+data[1]+" con A*",
+		   					JOptionPane.YES_NO_OPTION);	
+
+					}else{
+						JOptionPane.showMessageDialog(null,"Ingreso incorrecto de datos");
+					}
+				}
+
+			}else if(option == 2){
+				break;
+			}else{
+				JOptionPane.showMessageDialog(null,"Elige una opción disponible");
+			}
+		}
 
 	}
 

@@ -72,8 +72,9 @@ public class Grafo{
 				* Puedes descomentar esta linea 
 				* para verificar los ingresos en 
 				* la frontera
+				* Descomentar junto con linea 151
 				*/
-				//System.out.println(frontera);
+				//System.out.println("Frontera: "+frontera);
 				
 				Nodo aux = frontera.poll();
 
@@ -144,10 +145,11 @@ public class Grafo{
 
 			}
 		}
-		//System.out.println(nodos.get('G').getGh());
 		String s = solucion.resultado();
 		resetAllNodes();
-		///System.out.println(nodos.get('G').getGh());
+		//Descomentar junto con linea 76 
+		//si se desea ver el progreso de la frontera
+		//System.out.println("-------------");
 		return s;
 	}
 

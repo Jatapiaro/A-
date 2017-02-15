@@ -22,6 +22,7 @@ public class Nodo implements Comparable<Nodo>{
 	public void reset(){
 		this.g = this.h = 0;
 		camino = new ArrayList<Character>();
+		caminoPesos = new ArrayList<String>();
 	}
 
 	public void setAdyacentes(HashMap<Character,Integer> adyacentes){
