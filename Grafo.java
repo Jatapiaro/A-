@@ -27,6 +27,14 @@ public class Grafo{
 		}
 	}
 
+	/*
+	*Añade adyacencias bidireccionales
+	*/
+	public void addAdyacenteBi(char origen,char destino,int peso){
+		this.addAdyacente(origen,destino,peso);
+		this.addAdyacente(destino,origen,peso);
+	}
+
 	public void addAdyacente(char origen,char destino,int peso){
 		if(nodos.containsKey(origen) && nodos.containsKey(destino)){
 			nodos.get(origen).addAdyacente(destino,peso);
@@ -60,7 +68,13 @@ public class Grafo{
 			if(frontera.size() == 0){
 				return "No es posible llegar de "+inicio+" a "+fin;
 			}else{
+				/*
+				* Puedes descomentar esta linea 
+				* para verificar los ingresos en 
+				* la frontera
+				*/
 				//System.out.println(frontera);
+				
 				Nodo aux = frontera.poll();
 
 				if(aux.getId() == fin){

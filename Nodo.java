@@ -128,7 +128,6 @@ public class Nodo implements Comparable<Nodo>{
 				sb.append(caminoPesos.get(i)+"->");
 			}
 		}
-		//sb.append("/"+this.getGh());
 		return sb.toString();
 	}
 
