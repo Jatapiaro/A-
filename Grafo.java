@@ -62,12 +62,8 @@ public class Grafo{
 				return "No es posible llegar de "+inicio+" a "+fin;
 			}else{
 
-				System.out.println("Frontera: "+frontera);
-
 				Nodo aux = frontera.poll();
 
-				System.out.println("Cómo vas?: "+aux.getId()+": "+aux.getCamino());
-				
 				if(aux.getId() == fin){
 					solucion = aux;
 					break;
@@ -110,12 +106,13 @@ public class Grafo{
 					    	if(frontera.contains(hijo)){
 					    		if(hijo.getGh()>aux2.getGh()){
 					    			hijo.setG(newG);
-					    			hijo.setCamino(aux.getCamino());
+					    			hijo.setCamino(copyOfPath(aux.getCamino()));
 					    			hijo.addCamino(hijo.getId());
 					    		}
 					    	}else{
 					    		hijo.setG(newG);
-					    		hijo.setCamino(aux.getCamino());
+					    		List<Character> l = new ArrayList<Character>();
+					    		hijo.setCamino(copyOfPath(aux.getCamino()));
 					    		hijo.addCamino(hijo.getId());
 					    		frontera.add(hijo);
 					    	}
@@ -148,6 +145,21 @@ public class Grafo{
 
 	public void setHeuristic(HashMap<Character,Integer> heuristic){
 		this.heuristic = heuristic;
+	}
+
+	/*
+	*Crea una nueva instancia del camino actual
+	*Si no lo hacemos, con modificar una lista en otro objeto,
+	* se apuntara a la misma lista y estaremos modificando un solo
+	* objeto en lugar de dos diferentes
+	*/
+
+	public List<Character> copyOfPath(List<Character> path){
+		List<Character> l = new ArrayList<Character>();
+		for(char c : path){
+			l.add(c);
+		}
+		return l;
 	}
 
 

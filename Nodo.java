@@ -22,6 +22,9 @@ public class Nodo implements Comparable<Nodo>{
 		camino = new ArrayList<Character>();
 	}
 
+	public void setAdyacentes(HashMap<Character,Integer> adyacentes){
+		this.adyacentes = adyacentes;
+	}
 
 	public void addAdyacente(char id,int peso){
 		if(!this.adyacentes.containsKey(id)){
@@ -98,13 +101,16 @@ public class Nodo implements Comparable<Nodo>{
 
 	@Override
 	public String toString(){
-		/*StringBuilder sb = new StringBuilder();
-		for(char c : camino){
-			sb.append(c+"->");
+		StringBuilder sb = new StringBuilder();
+		for(int i=0;i<this.camino.size();i++){
+			if(i==this.camino.size()-1){
+				sb.append(camino.get(i));
+			}else{
+				sb.append(camino.get(i)+"->");
+			}
 		}
-		sb.append(" : "+this.getGh());
-		return sb.toString();*/
-		return ""+this.id+"/"+this.getGh();
+		sb.append("/"+this.getGh());
+		return sb.toString();
 	}
 
 }
