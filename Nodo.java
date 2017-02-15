@@ -8,12 +8,14 @@ public class Nodo implements Comparable<Nodo>{
 	private int g,h,gh;
 	private HashMap<Character,Integer> adyacentes;
 	private List<Character> camino;
+	private List<String> caminoPesos;
 
 	public Nodo(char id){
 		this.id = id;
 		this.g = this.h = 0;
 		adyacentes = new HashMap<Character,Integer>();
 		camino = new ArrayList<Character>();
+		caminoPesos = new ArrayList<String>();
 		this.gh = g+h;
 	}
 
@@ -77,6 +79,19 @@ public class Nodo implements Comparable<Nodo>{
 	}
 
 
+	public List<String> getCaminoPesos(){
+		return this.caminoPesos;
+	}
+
+	public void setCaminoPesos(List<String> caminoPesos){
+		this.caminoPesos = caminoPesos;
+	}
+
+	public void addCaminoPeso(String s){
+		this.caminoPesos.add(s);
+	}
+
+
 	@Override
 	public int compareTo(Nodo other){
 
@@ -101,15 +116,19 @@ public class Nodo implements Comparable<Nodo>{
 
 	@Override
 	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		for(int i=0;i<this.camino.size();i++){
+		return this.id+"/"+this.getGh();
+	}
+
+	public String resultado(){
+		StringBuilder sb = new StringBuilder("Camino: ");
+		for(int i=0;i<this.caminoPesos.size();i++){
 			if(i==this.camino.size()-1){
-				sb.append(camino.get(i));
+				sb.append(caminoPesos.get(i));
 			}else{
-				sb.append(camino.get(i)+"->");
+				sb.append(caminoPesos.get(i)+"->");
 			}
 		}
-		sb.append("/"+this.getGh());
+		//sb.append("/"+this.getGh());
 		return sb.toString();
 	}
 

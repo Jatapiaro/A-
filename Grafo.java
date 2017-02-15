@@ -54,14 +54,14 @@ public class Grafo{
 		//System.out.println("Nodo incio: "+incial.getId()+"\n------");
 		Nodo solucion;
 		incial.addCamino(inicio);
-		//System.out.println("Camino: "+incial.getCamino());
+		incial.addCaminoPeso(inicio+"/"+incial.getGh());
 		frontera.add(incial);
 
 		while(true){
 			if(frontera.size() == 0){
 				return "No es posible llegar de "+inicio+" a "+fin;
 			}else{
-
+				System.out.println(frontera);
 				Nodo aux = frontera.poll();
 
 				if(aux.getId() == fin){
@@ -107,13 +107,17 @@ public class Grafo{
 					    		if(hijo.getGh()>aux2.getGh()){
 					    			hijo.setG(newG);
 					    			hijo.setCamino(copyOfPath(aux.getCamino()));
+					    			hijo.setCaminoPesos(copyOfPathW(aux.getCaminoPesos()));
 					    			hijo.addCamino(hijo.getId());
+					    			hijo.addCaminoPeso(hijo.getId()+"/"+hijo.getGh());
 					    		}
 					    	}else{
 					    		hijo.setG(newG);
 					    		List<Character> l = new ArrayList<Character>();
 					    		hijo.setCamino(copyOfPath(aux.getCamino()));
+					    		hijo.setCaminoPesos(copyOfPathW(aux.getCaminoPesos()));
 					    		hijo.addCamino(hijo.getId());
+					    		hijo.addCaminoPeso(hijo.getId()+"/"+hijo.getGh());
 					    		frontera.add(hijo);
 					    	}
 					    	//System.out.println("Insertando: "+hijo.getId());
@@ -128,7 +132,7 @@ public class Grafo{
 			}
 		}
 
-		return solucion.toString();
+		return solucion.resultado();
 	}
 
 	private void implementHeuristic(){
@@ -157,6 +161,14 @@ public class Grafo{
 	public List<Character> copyOfPath(List<Character> path){
 		List<Character> l = new ArrayList<Character>();
 		for(char c : path){
+			l.add(c);
+		}
+		return l;
+	}
+
+	public List<String> copyOfPathW(List<String> path){
+		List<String> l = new ArrayList<String>();
+		for(String c : path){
 			l.add(c);
 		}
 		return l;
