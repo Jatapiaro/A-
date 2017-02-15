@@ -51,7 +51,6 @@ public class Grafo{
 		Queue<Nodo> frontera = new PriorityQueue<Nodo>();
 
 		Nodo incial = nodos.get(inicio);
-		//System.out.println("Nodo incio: "+incial.getId()+"\n------");
 		Nodo solucion;
 		incial.addCamino(inicio);
 		incial.addCaminoPeso(inicio+"/"+incial.getGh());
@@ -61,7 +60,7 @@ public class Grafo{
 			if(frontera.size() == 0){
 				return "No es posible llegar de "+inicio+" a "+fin;
 			}else{
-				System.out.println(frontera);
+				//System.out.println(frontera);
 				Nodo aux = frontera.poll();
 
 				if(aux.getId() == fin){
@@ -131,8 +130,11 @@ public class Grafo{
 
 			}
 		}
-
-		return solucion.resultado();
+		//System.out.println(nodos.get('G').getGh());
+		String s = solucion.resultado();
+		resetAllNodes();
+		///System.out.println(nodos.get('G').getGh());
+		return s;
 	}
 
 	private void implementHeuristic(){
@@ -144,6 +146,15 @@ public class Grafo{
 			*/
 			Map.Entry pair = (Map.Entry)it.next();
 			nodos.get(pair.getKey()).setH((int)pair.getValue());
+		}
+	}
+
+	public void resetAllNodes(){
+		Iterator it = nodos.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry pair = (Map.Entry)it.next();
+			//System.out.println("Resetando: "+pair.getKey());
+			((Nodo)pair.getValue()).reset();
 		}
 	}
 
