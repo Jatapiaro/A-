@@ -134,7 +134,6 @@ public class Grafo{
 					    		hijo.addCaminoPeso(hijo.getId()+"/"+hijo.getGh());
 					    		frontera.add(hijo);
 					    	}
-					    	//System.out.println("Insertando: "+hijo.getId());
 					    	
 					    }
 

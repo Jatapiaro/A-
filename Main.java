@@ -64,7 +64,7 @@ public class Main{
 				JOptionPane.showInputDialog("1.Encuentra una ruta\n2.Salir"));
 			if(option == 1){
 				String[] data = JOptionPane.showInputDialog(
-					"Ingresa los ID's de los nodos separados por una coma. \n\tEjemplo: A,H").split(",");
+					"Ingresa los ID's de los nodos separados por una coma. \n\tEjemplo: A,H").toUpperCase().split(",");
 
 				if(data.length>2){
 					JOptionPane.showMessageDialog(null,"Ingreso incorrecto de datos");
